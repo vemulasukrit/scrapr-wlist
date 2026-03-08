@@ -1,5 +1,7 @@
 # SCRAPR - The API for the Entire Internet
 
+<a href="https://www.producthunt.com/products/scrapr-universal-web-scraping-api?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-scrapr-universal-web-scraping-api" target="_blank" rel="noopener noreferrer"><img alt="SCRAPR — Universal Web Scraping API - Turn any website into an API | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1092571&theme=dark&t=1772960046917"></a>
+
 A modern, responsive landing page for SCRAPR, the browser automation and web scraping API.
 
 ## Getting Started
