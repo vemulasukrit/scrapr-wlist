@@ -55,8 +55,6 @@ const Index = () => {
       {/* Background gradient effect */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-blue-50 opacity-40" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" />
-        <div className="absolute -bottom-8 right-1/4 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '0.5s' }} />
       </div>
       <div className="relative z-10">
       {/* NAV */}
@@ -152,61 +150,60 @@ const Index = () => {
             >
               <WaitlistForm source="hero" />
             </motion.div>
-
-            <motion.div
-              className="mt-6 sm:mt-8 flex justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1 }}
-            >
-              <motion.div
-                className="border-2 border-foreground p-4 sm:p-6 max-w-sm group hover:border-blue-400 transition-colors"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="flex items-center gap-3 sm:gap-4 mb-4">
-                  <img
-                    alt="SCRAPR — Universal Web Scraping API"
-                    src="https://ph-files.imgix.net/139cf19d-fb8c-475d-8dc3-264bbb9283ac.png?auto=format&fit=crop&w=64&h=64"
-                    className="w-16 h-16 flex-shrink-0"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-mono text-base sm:text-lg font-bold text-foreground leading-tight group-hover:text-blue-400 transition-colors line-clamp-2">SCRAPR — Universal Web Scraping API</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground font-sans leading-tight mt-1 line-clamp-2">Turn any website into an API</p>
-                  </div>
-                </div>
-                <a
-                  href="https://www.producthunt.com/products/scrapr-universal-web-scraping-api?embed=true&utm_source=embed&utm_medium=post_embed"
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-foreground text-background font-mono text-xs sm:text-sm font-bold tracking-widest uppercase hover:bg-background hover:text-foreground border-2 border-foreground transition-colors group-hover:border-blue-400"
-                >
-                  View on PH →
-                </a>
-              </motion.div>
-            </motion.div>
           </div>
 
           <motion.div
-            className="hidden md:block relative"
+            className="hidden md:block relative space-y-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.4 }}
           >
-            {/* Interactive CLI mockup - Simple brutalist card */}
+            {/* Product Hunt Card */}
             <motion.div
-              className="border-2 border-foreground p-4 sm:p-5 md:p-6 h-full flex flex-col group hover:border-blue-400 transition-colors"
+              className="border-2 border-foreground p-5 md:p-6 group hover:border-blue-400 transition-colors"
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h4 className="text-base sm:text-lg font-mono font-bold text-foreground mb-3 sm:mb-4 group-hover:text-blue-400 transition-colors">CLI Example</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground font-sans leading-relaxed mb-4">Parse any URL in seconds</p>
-              <div className="font-mono text-xs sm:text-sm text-foreground space-y-2 flex-grow">
-                <div><span className="text-muted-foreground">$</span> scrapr parse --url github.com</div>
-                <div><span className="text-muted-foreground">✓</span> Extracted 459 repositories</div>
-                <div><span className="text-muted-foreground">✓</span> Complete in 156ms</div>
+              <div className="flex items-start gap-3 mb-4">
+                <img
+                  alt="SCRAPR — Universal Web Scraping API"
+                  src="https://ph-files.imgix.net/139cf19d-fb8c-475d-8dc3-264bbb9283ac.png?auto=format&fit=crop&w=56&h=56"
+                  className="w-14 h-14 flex-shrink-0"
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-mono text-muted-foreground tracking-widest uppercase mb-1">Featured On</p>
+                  <h3 className="font-mono text-base font-bold text-foreground leading-tight group-hover:text-blue-400 transition-colors">Product Hunt</h3>
+                </div>
               </div>
+              <a
+                href="https://www.producthunt.com/products/scrapr-universal-web-scraping-api?embed=true&utm_source=embed&utm_medium=post_embed"
+                target="_blank"
+                rel="noopener"
+                className="block w-full text-center px-3 py-2 bg-foreground text-background font-mono text-xs font-bold tracking-widest uppercase hover:bg-background hover:text-foreground border-2 border-foreground transition-colors"
+              >
+                View Product
+              </a>
+            </motion.div>
+
+            {/* CLI Example Mockup */}
+            <motion.div
+              className="border-2 border-foreground p-5 md:p-6 flex flex-col group hover:border-blue-400 transition-colors"
+              whileHover={{ scale: 1.02 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <h4 className="text-sm font-mono font-bold text-foreground mb-3 group-hover:text-blue-400 transition-colors">Try it now</h4>
+              <div className="bg-secondary border border-foreground p-3 mb-3 flex-grow">
+                <div className="font-mono text-xs text-foreground space-y-1.5">
+                  <div><span className="text-muted-foreground">$</span> scrapr parse --url github.com</div>
+                  <div><span className="text-muted-foreground">✓</span> Extracted 459 repos</div>
+                  <div><span className="text-muted-foreground">✓</span> Complete 156ms</div>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground font-sans leading-relaxed">Instant extraction into JSON or any format</p>
             </motion.div>
           </motion.div>
         </div>
@@ -272,56 +269,45 @@ const Index = () => {
 
           {/* RESPONSE PANEL */}
           <ScrollReveal direction="right">
-            <motion.div className="border-2 border-foreground bg-secondary p-3 sm:p-4 md:p-6 font-mono text-xs overflow-auto max-h-[350px] sm:max-h-[450px]">
+            <motion.div className="border-2 border-foreground bg-secondary p-4 sm:p-5 md:p-6 font-mono text-xs overflow-auto max-h-[350px] sm:max-h-[450px]">
               <motion.div
-                className="text-muted-foreground mb-2 sm:mb-3"
+                className="mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-foreground"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                <span className="text-foreground">Status:</span> <span className="text-green-600">200 OK</span>
-              </motion.div>
-              <motion.div
-                className="text-muted-foreground mb-2 sm:mb-3 text-xs"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <span className="text-foreground">Response time:</span> <span className="inline-block"><motion.span animate={{ opacity: [0, 1] }} transition={{ duration: 0.5, delay: 0.4 }}>6939ms</motion.span></span>
+                <p className="text-muted-foreground"><span className="text-foreground">Status:</span> 200 OK</p>
+                <p className="text-muted-foreground mt-1"><span className="text-foreground">Response time:</span> 234ms</p>
               </motion.div>
 
-              <div className="prose prose-invert max-w-none text-xs leading-relaxed space-y-2 text-muted-foreground">
+              <div className="space-y-3 text-muted-foreground leading-relaxed">
                 {[
-                  { title: "Requests for Startups", desc: "Y Combinator is looking for startups working on these ideas. If you're working on something we're interested in, we'd love to hear from you." },
-                  { title: "Spring 2026", desc: "The way startups are built has shifted quickly. AI-native companies can now be built faster, cheaper, and with more ambition than ever.", isSection: true },
-                  { title: "Cursor for Product Managers", desc: "Imagine a tool where you upload customer interviews and product usage data, ask \"what should we build next?\", and get the outline of a new feature complete with an explanation based on customer feedback." },
-                  { title: "AI-Native Hedge Funds", desc: "The biggest funds in the world have been slow to adapt. We think the hedge funds of the future will use AI to come up with entirely new strategies." },
-                  { title: "AI-Native Agencies", desc: "Agencies have always been tough to scale. But AI changes this—instead of selling software, charge way more by using it yourself and selling the finished product at 100x the price." },
-                  { title: "Modern Metal Mills", desc: "American metal mills are slow by design. If you buy rolled aluminum or steel tube, lead times of 8-30 weeks are normal. Software and energy technology are finally good enough to rethink the system." },
+                  { title: "Requests for Startups", desc: "Y Combinator is looking for startups working on these ideas." },
+                  { title: "Spring 2026", desc: "The way startups are built has shifted quickly. AI-native companies..." },
+                  { title: "Cursor for Product Managers", desc: "Imagine a tool where you upload customer interviews..." },
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + idx * 0.1, duration: 0.4 }}
+                    initial={{ opacity: 0, y: -5 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + idx * 0.1, duration: 0.4 }}
                     viewport={{ once: true }}
                   >
-                    <h3 className={item.isSection ? "text-xs font-bold text-foreground mb-1" : "text-xs font-bold text-foreground mb-0.5"}>{item.title}</h3>
-                    <p className="text-xs">{item.desc}</p>
+                    <p className="text-foreground font-bold text-xs">{item.title}</p>
+                    <p className="text-xs mt-0.5">{item.desc}</p>
                   </motion.div>
                 ))}
 
-                <motion.p
-                  className="text-xs pt-2 border-t border-border"
+                <motion.div
+                  className="pt-3 sm:pt-4 border-t border-foreground mt-3 sm:mt-4"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  transition={{ delay: 1.2, duration: 0.5 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  ✓ Response contains 16,087 characters | ✓ Page parsed in 6939ms | ✓ 12 embeds detected
-                </motion.p>
+                  <p className="text-xs text-foreground">✓ 3 results | ✓ 412 chars | ✓ Clean JSON ready</p>
+                </motion.div>
               </div>
             </motion.div>
           </ScrollReveal>
@@ -329,42 +315,17 @@ const Index = () => {
       </section>
 
       {/* HEADLINE */}
-      <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground relative">
-        {/* Floating decorative elements */}
-        <motion.div
-          className="absolute top-10 left-1/4 w-2 h-2 bg-blue-400 rounded-full opacity-50"
-          animate={{ y: [0, -20, 0], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute top-20 right-1/4 w-2 h-2 bg-purple-400 rounded-full opacity-50"
-          animate={{ y: [0, 20, 0], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-        />
+      <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
         <ScrollReveal>
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-2 sm:mb-3 relative">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-2 sm:mb-3">
               THE API FOR
-              <motion.div
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent"
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              />
             </h2>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-2 sm:mb-3">
               THE ENTIRE
             </h2>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-6 sm:mb-8 relative">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-6 sm:mb-8">
               INTERNET
-              <motion.div
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent"
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-              />
             </h2>
             <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
               {["Every site.", "Every action.", "One API."].map((text, idx) => (
@@ -498,41 +459,168 @@ print(result.json())`,
       </section>
 
       {/* API REFERENCE */}
-      <ScrollReveal>
-        <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
-          <div className="max-w-4xl">
-            <p className="font-mono text-xs text-muted-foreground tracking-widest mb-4 sm:mb-5 uppercase">// api reference</p>
-            <div className="border-2 border-foreground bg-secondary px-3 sm:px-5 py-2 sm:py-3 mb-6 sm:mb-8 inline-block">
-              <span className="font-mono text-base sm:text-lg font-bold text-foreground">GET</span>
-              <span className="font-mono text-base sm:text-lg font-bold text-foreground ml-2 sm:ml-4">/api/scrape</span>
+      <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-12 sm:mb-16">
+              <p className="font-mono text-xs text-muted-foreground tracking-widest mb-2 sm:mb-3 uppercase">// api reference</p>
+              <h3 className="text-lg sm:text-2xl md:text-4xl font-mono font-bold tracking-tight text-foreground">
+                Built for developers.
+              </h3>
             </div>
-            
-            <h4 className="font-mono text-sm sm:text-base font-bold text-foreground mb-3 sm:mb-4 uppercase">Parameters</h4>
-            <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
-              {[
-                { param: "url", desc: "required · target URL to scrape" },
-                { param: "output", desc: "json | markdown · default: markdown" },
-                { param: "interactive", desc: "boolean · default: true" },
-              ].map((row) => (
-                <div key={row.param} className="border-b border-foreground pb-2 sm:pb-3">
-                  <div className="font-mono font-bold text-foreground text-sm mb-0.5">{row.param}</div>
-                  <div className="text-muted-foreground font-sans text-xs">{row.desc}</div>
+          </ScrollReveal>
+
+          {/* Bento Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            {/* GET Endpoint - spans 2 columns on desktop */}
+            <ScrollReveal direction="up" delay={0}>
+              <motion.div
+                className="md:col-span-2 border-2 border-foreground p-4 sm:p-6 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.01 }}
+              >
+                <div className="flex items-center gap-2 sm:gap-3 mb-4">
+                  <span className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 bg-foreground text-background font-mono text-xs font-bold tracking-widest">GET</span>
+                  <span className="font-mono text-sm sm:text-base font-bold text-foreground group-hover:text-blue-400 transition-colors">/api/scrape</span>
                 </div>
-              ))}
-            </div>
-            
-            <h4 className="font-mono text-sm sm:text-base font-bold text-foreground mb-3 sm:mb-4 uppercase">Responses</h4>
-            <div className="flex gap-2 flex-wrap">
-              <div className="border-2 border-foreground px-3 sm:px-4 py-1.5 sm:py-2">
-                <span className="font-mono text-xs sm:text-sm font-bold text-foreground">200 OK</span>
-              </div>
-              <div className="border-2 border-foreground px-3 sm:px-4 py-1.5 sm:py-2">
-                <span className="font-mono text-xs sm:text-sm font-bold text-foreground">422 Validation Error</span>
-              </div>
-            </div>
+                
+                <div className="mb-4">
+                  <h4 className="font-mono text-xs font-bold text-foreground uppercase tracking-widest mb-2 group-hover:text-blue-400 transition-colors">Parameters</h4>
+                  <div className="space-y-2">
+                    <div className="border-l-2 border-blue-400/50 pl-2.5">
+                      <div className="font-mono text-xs font-bold text-foreground">url</div>
+                      <p className="text-xs text-muted-foreground font-sans mt-0.5">string, required</p>
+                    </div>
+                    <div className="border-l-2 border-blue-400/50 pl-2.5">
+                      <div className="font-mono text-xs font-bold text-foreground">output</div>
+                      <p className="text-xs text-muted-foreground font-sans mt-0.5">json | markdown | xml</p>
+                    </div>
+                    <div className="border-l-2 border-blue-400/50 pl-2.5">
+                      <div className="font-mono text-xs font-bold text-foreground">interactive</div>
+                      <p className="text-xs text-muted-foreground font-sans mt-0.5">boolean · Default: true</p>
+                    </div>
+                    <div className="border-l-2 border-blue-400/50 pl-2.5">
+                      <div className="font-mono text-xs font-bold text-foreground">timeout</div>
+                      <p className="text-xs text-muted-foreground font-sans mt-0.5">integer · Default: 30000ms</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-foreground pt-4 mt-auto">
+                  <p className="text-xs font-mono text-muted-foreground">Response: <span className="text-foreground font-bold">200 OK</span> or <span className="text-foreground font-bold">422 Error</span></p>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Curl Example */}
+            <ScrollReveal direction="up" delay={0.1}>
+              <motion.div
+                className="border-2 border-foreground p-4 sm:p-5 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.01 }}
+              >
+                <h4 className="font-mono text-xs font-bold text-foreground uppercase tracking-widest mb-3 group-hover:text-blue-400 transition-colors">Quick Start</h4>
+                <pre className="bg-secondary border border-foreground/30 p-2.5 text-[10px] sm:text-xs overflow-x-auto font-mono text-foreground leading-tight flex-grow">
+{`curl https://api.scrapr.sh \\
+  -H "Authorization: KEY" \\
+  -G --data-urlencode \\
+  "url=https://example.com"`}
+                </pre>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* POST Endpoint */}
+            <ScrollReveal direction="up" delay={0.2}>
+              <motion.div
+                className="border-2 border-foreground p-4 sm:p-5 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.01 }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="inline-block px-2 py-0.5 bg-foreground text-background font-mono text-xs font-bold tracking-widest">POST</span>
+                  <span className="font-mono text-xs font-bold text-foreground group-hover:text-blue-400 transition-colors">/api/scrape</span>
+                </div>
+                <p className="text-xs text-muted-foreground font-sans mb-3">For complex operations like form fills, clicks, and actions.</p>
+                <div className="space-y-1.5 flex-grow">
+                  <div className="border-l-2 border-blue-400/50 pl-2">
+                    <p className="font-mono text-xs font-bold text-foreground">actions</p>
+                    <p className="text-xs text-muted-foreground">Click, fill, submit</p>
+                  </div>
+                  <div className="border-l-2 border-blue-400/50 pl-2">
+                    <p className="font-mono text-xs font-bold text-foreground">webhook</p>
+                    <p className="text-xs text-muted-foreground">Get notified</p>
+                  </div>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Success Response */}
+            <ScrollReveal direction="up" delay={0.3}>
+              <motion.div
+                className="md:col-span-2 border-2 border-foreground p-4 sm:p-5 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.01 }}
+              >
+                <h4 className="font-mono text-xs font-bold text-foreground uppercase tracking-widest mb-3 group-hover:text-blue-400 transition-colors">200 OK Response</h4>
+                <pre className="bg-secondary border border-foreground/30 p-2.5 text-[10px] sm:text-xs overflow-x-auto font-mono text-foreground leading-tight flex-grow">
+{`{
+  "status": "success",
+  "data": {
+    "title": "...",
+    "content": "...",
+    "links": []
+  },
+  "meta": {
+    "time_ms": 234,
+    "url": "https://..."
+  }
+}`}
+                </pre>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Error Response */}
+            <ScrollReveal direction="up" delay={0.4}>
+              <motion.div
+                className="border-2 border-foreground p-4 sm:p-5 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.01 }}
+              >
+                <h4 className="font-mono text-xs font-bold text-foreground uppercase tracking-widest mb-3 group-hover:text-blue-400 transition-colors">422 Error</h4>
+                <pre className="bg-secondary border border-foreground/30 p-2.5 text-[10px] sm:text-xs overflow-x-auto font-mono text-foreground leading-tight flex-grow">
+{`{
+  "status": "error",
+  "error": {
+    "code": "INVALID_URL",
+    "message": "Valid URL required"
+  }
+}`}
+                </pre>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Status Codes */}
+            <ScrollReveal direction="up" delay={0.5}>
+              <motion.div
+                className="md:col-span-3 border-2 border-foreground p-4 sm:p-5 group hover:border-blue-400 transition-colors"
+                whileHover={{ scale: 1.01 }}
+              >
+                <h4 className="font-mono text-xs font-bold text-foreground uppercase tracking-widest mb-4 group-hover:text-blue-400 transition-colors">// HTTP Status Codes</h4>
+                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-1.5 sm:gap-2">
+                  {[
+                    { code: "200", status: "OK" },
+                    { code: "400", status: "Bad Req" },
+                    { code: "401", status: "Unauth" },
+                    { code: "422", status: "Validation" },
+                    { code: "429", status: "Rate Limit" },
+                    { code: "500", status: "Error" },
+                  ].map((item) => (
+                    <div key={item.code} className="border border-foreground/50 p-1.5 text-center leading-tight">
+                      <p className="font-mono font-bold text-foreground text-xs sm:text-sm">{item.code}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{item.status}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </ScrollReveal>
           </div>
-        </section>
-      </ScrollReveal>
+        </div>
+      </section>
 
       {/* STATS SECTION */}
       <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
@@ -587,24 +675,170 @@ print(result.json())`,
               Read and Act.
             </h3>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-            {[
-              { title: "Book flights & hotels", desc: "Search availability, compare prices, complete purchase flows automatically." },
-              { title: "Fill out forms", desc: "Submit applications, fill registration, complete checkout flows programmatically." },
-              { title: "Make reservations", desc: "Book restaurants, schedule appointments, reserve venues via natural language." },
-            ].map((cap, idx) => (
-              <ScrollReveal key={cap.title} delay={idx * 0.2}>
-                <motion.div
-                  className="border border-foreground p-4 sm:p-5 md:p-6 h-full flex flex-col group hover:border-purple-400 transition-colors"
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span className="font-mono text-xs text-muted-foreground tracking-widest mb-2 sm:mb-3 block uppercase group-hover:text-purple-400 transition-colors">Action</span>
-                  <h4 className="text-base sm:text-lg md:text-xl font-mono font-bold text-foreground mb-2 sm:mb-3 leading-tight group-hover:text-purple-400 transition-colors">{cap.title}</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground font-sans leading-relaxed flex-grow">{cap.desc}</p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+            {/* Book Flights & Hotels */}
+            <ScrollReveal delay={0}>
+              <motion.div
+                className="border-2 border-foreground p-4 sm:p-5 md:p-6 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.02 }}
+              >
+                <span className="font-mono text-xs text-muted-foreground tracking-widest mb-3 block uppercase group-hover:text-blue-400 transition-colors">Action 01</span>
+                <h4 className="text-base sm:text-lg font-mono font-bold text-foreground mb-4 leading-tight group-hover:text-blue-400 transition-colors">Book flights & hotels</h4>
+                
+                {/* Mockup */}
+                <div className="bg-secondary border border-foreground/50 p-3 mb-4 flex-grow">
+                  <div className="text-xs space-y-2">
+                    <motion.div
+                      className="border-b border-foreground/30 pb-2"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                      viewport={{ once: true }}
+                    >
+                      <p className="font-mono font-bold text-foreground">SEARCH→</p>
+                      <p className="text-muted-foreground">JFK to LAX</p>
+                    </motion.div>
+                    
+                    <motion.div
+                      className="border-b border-foreground/30 pb-2"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                      viewport={{ once: true }}
+                    >
+                      <p className="font-mono font-bold text-foreground">COMPARE</p>
+                      <p className="text-muted-foreground">3 flights • $450-$890</p>
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.6 }}
+                      viewport={{ once: true }}
+                    >
+                      <p className="font-mono font-bold text-foreground">BOOK ✓</p>
+                      <p className="text-muted-foreground">Confirmed in 2s</p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm text-muted-foreground font-sans leading-relaxed">Search availability, compare prices, complete purchase flows automatically.</p>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Fill out forms */}
+            <ScrollReveal delay={0.1}>
+              <motion.div
+                className="border-2 border-foreground p-4 sm:p-5 md:p-6 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.02 }}
+              >
+                <span className="font-mono text-xs text-muted-foreground tracking-widest mb-3 block uppercase group-hover:text-blue-400 transition-colors">Action 02</span>
+                <h4 className="text-base sm:text-lg font-mono font-bold text-foreground mb-4 leading-tight group-hover:text-blue-400 transition-colors">Fill out forms</h4>
+
+                {/* Mockup */}
+                <div className="bg-secondary border border-foreground/50 p-3 mb-4 flex-grow space-y-2">
+                  <div className="text-xs space-y-1.5">
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ delay: 0.2, duration: 0.5 }}
+                      viewport={{ once: true }}
+                      className="origin-left"
+                    >
+                      <div className="border-b border-foreground/30 pb-1">
+                        <p className="font-mono text-foreground/60 text-[10px]">name</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ delay: 0.4, duration: 0.5 }}
+                      viewport={{ once: true }}
+                      className="origin-left"
+                    >
+                      <div className="border-b border-foreground/30 pb-1">
+                        <p className="font-mono text-foreground/60 text-[10px]">email</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                      viewport={{ once: true }}
+                      className="origin-left"
+                    >
+                      <div className="border-b border-foreground/30 pb-1">
+                        <p className="font-mono text-foreground/60 text-[10px]">message</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.9 }}
+                      viewport={{ once: true }}
+                    >
+                      <p className="font-mono font-bold text-foreground">SUBMIT ✓</p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm text-muted-foreground font-sans leading-relaxed">Submit applications, fill registration, complete checkout flows programmatically.</p>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Make reservations */}
+            <ScrollReveal delay={0.2}>
+              <motion.div
+                className="border-2 border-foreground p-4 sm:p-5 md:p-6 group hover:border-blue-400 transition-colors h-full flex flex-col"
+                whileHover={{ scale: 1.02 }}
+              >
+                <span className="font-mono text-xs text-muted-foreground tracking-widest mb-3 block uppercase group-hover:text-blue-400 transition-colors">Action 03</span>
+                <h4 className="text-base sm:text-lg font-mono font-bold text-foreground mb-4 leading-tight group-hover:text-blue-400 transition-colors">Make reservations</h4>
+
+                {/* Mockup */}
+                <div className="bg-secondary border border-foreground/50 p-3 mb-4 flex-grow">
+                  <div className="text-xs space-y-2">
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      viewport={{ once: true }}
+                      className="border-b border-foreground/30 pb-2"
+                    >
+                      <p className="font-mono font-bold text-foreground">PARSE</p>
+                      <p className="text-muted-foreground text-[10px]">Find restaurant</p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      viewport={{ once: true }}
+                      className="border-b border-foreground/30 pb-2"
+                    >
+                      <p className="font-mono font-bold text-foreground">SELECT</p>
+                      <p className="text-muted-foreground text-[10px]">8 PM • Party of 4</p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                      viewport={{ once: true }}
+                      className="bg-foreground text-background px-2 py-1 mt-2"
+                    >
+                      <p className="font-mono font-bold text-[11px]">BOOKED ✓</p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm text-muted-foreground font-sans leading-relaxed">Book restaurants, schedule appointments, reserve venues via natural language.</p>
+              </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -776,35 +1010,77 @@ print(result.json())`,
 
       {/* FOOTER CTA */}
       <ScrollReveal>
-        <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground relative">
-          <motion.div
-            className="absolute top-6 right-20 w-3 h-3 bg-blue-500 rounded-full opacity-40"
-            animate={{ y: [0, -15, 0], x: [0, 10, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute bottom-10 left-20 w-2 h-2 bg-purple-500 rounded-full opacity-40"
-            animate={{ y: [0, 15, 0], x: [0, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
-          />
-          <div className="max-w-lg mx-auto text-center">
+        <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <WaitlistForm source="footer" />
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold text-foreground mb-4 sm:mb-6 text-center">Ready to parse anything?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground font-sans text-center mb-8 sm:mb-10 max-w-2xl mx-auto">Join thousands of developers using SCRAPR to extract structured data from any website instantly.</p>
+              <div className="flex justify-center mb-12 sm:mb-16">
+                <WaitlistForm source="footer" />
+              </div>
             </motion.div>
-            <motion.p
-              className="text-center font-mono text-xs text-muted-foreground mt-6 sm:mt-8 tracking-widest"
+
+            <motion.div
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 border-t border-foreground pt-8 sm:pt-12"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              SCRAPR · v1.0 · © 2026
-            </motion.p>
+              <div>
+                <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-3">Product</p>
+                <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground font-sans">
+                  <li><a href="#" className="hover:text-foreground transition-colors">Features</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Pricing</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">API Docs</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Status</a></li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-3">Company</p>
+                <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground font-sans">
+                  <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-3">Legal</p>
+                <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground font-sans">
+                  <li><a href="#" className="hover:text-foreground transition-colors">Privacy</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Terms</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Cookie Policy</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">License</a></li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-3">Connect</p>
+                <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground font-sans">
+                  <li><a href="#" className="hover:text-foreground transition-colors">GitHub</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Twitter</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Discord</a></li>
+                  <li><a href="#" className="hover:text-foreground transition-colors">Email</a></li>
+                </ul>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="text-center border-t border-foreground pt-8 sm:pt-10 mt-8 sm:mt-10"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <p className="font-mono text-xs text-muted-foreground tracking-widest">
+                SCRAPR · v1.0 · © 2026 · All rights reserved
+              </p>
+            </motion.div>
           </div>
         </section>
       </ScrollReveal>
