@@ -4,7 +4,7 @@ import WaitlistForm from "@/components/WaitlistForm";
 import LiveDemo from "@/components/LiveDemo";
 import WaitlistCounter from "@/components/WaitlistCounter";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Check, Terminal, Code, Zap, ChevronDown } from "lucide-react";
+import { Check, Terminal, Code, Zap, ChevronDown, TrendingUp, BarChart3, GitBranch, Database, Cpu, X } from "lucide-react";
 
 // FAQ Item Component
 const FAQItem = ({ question, answer, index }) => {
@@ -227,39 +227,179 @@ const Index = () => {
 
       {/* FUNDRAISING CTA */}
       <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-16 sm:py-20 md:py-24 border-t border-foreground bg-gradient-to-br from-blue-500 to-blue-600">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="text-center mb-12 sm:mb-16"
           >
             <p className="font-mono text-xs sm:text-sm text-blue-100 tracking-widest mb-4 uppercase">💰 We're Fundraising</p>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-mono font-bold text-white mb-4 sm:mb-6 leading-tight">
               Join Us in Building<br />the Future of Data
             </h2>
             <p className="text-base sm:text-lg text-blue-50 font-sans max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-              SCRAPR is raising to expand globally and scale the infrastructure that powers the next generation of AI agents. We're looking for strategic investors and partners who believe in zero-maintenance data extraction.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:sukritvemula@outlook.com"
-                className="px-8 py-4 bg-white text-blue-600 font-mono font-bold text-sm sm:text-base tracking-widest uppercase hover:bg-blue-50 transition-colors border-2 border-white"
-              >
-                Let's Talk
-              </a>
-              <a
-                href="mailto:sukritvemula@outlook.com?subject=SCRAPR Investment Interest"
-                className="px-8 py-4 border-2 border-white text-white font-mono font-bold text-sm sm:text-base tracking-widest uppercase hover:bg-white hover:text-blue-600 transition-colors"
-              >
-                Investment Inquiry
-              </a>
-            </div>
-            <p className="text-xs sm:text-sm text-blue-100 font-sans mt-8">
-              Based in San Francisco • Backed by founders • Seed stage • Multiple rounds of funding discussions in progress
+              SCRAPR started as a bootstrapped MVP built to solve our own data extraction pain points. We've proven traction on Product Hunt and are now raising seed funding to scale globally. We're looking for investors and partners who believe in the future of zero-maintenance, AI-ready data infrastructure.
             </p>
           </motion.div>
+
+          {/* FUNDING STATS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
+            {[
+              { icon: TrendingUp, label: "Product Hunt", value: "#5", desc: "Featured & validated" },
+              { icon: BarChart3, label: "Waitlist", value: "402", desc: "Pre-launch signups" },
+              { icon: Database, label: "Bootstrapped", value: "MVP", desc: "Ready to scale" },
+            ].map((stat, idx) => {
+              const Icon = stat.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="border-2 border-white border-opacity-30 p-6 backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <Icon className="w-6 h-6 text-white" />
+                    <p className="font-mono text-xs text-blue-100 tracking-widest uppercase">{stat.label}</p>
+                  </div>
+                  <p className="text-3xl sm:text-4xl font-mono font-bold text-white mb-2">{stat.value}</p>
+                  <p className="text-sm text-blue-50 font-sans">{stat.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* FUNDING VISUALIZATION */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="border-2 border-white border-opacity-30 p-6 sm:p-8 backdrop-blur-sm mb-12 sm:mb-16"
+          >
+            <p className="font-mono text-xs text-blue-100 tracking-widest mb-6 uppercase">The Plan</p>
+            <div className="space-y-4">
+              {[
+                { stage: "MVP Built", complete: 100 },
+                { stage: "Seed Fundraising", complete: 45 },
+                { stage: "Series A Ready", complete: 0 },
+              ].map((item, idx) => (
+                <div key={idx} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-mono text-sm text-white">{item.stage}</span>
+                    <span className="font-mono text-xs text-blue-100">{item.complete}%</span>
+                  </div>
+                  <div className="h-2 border border-white border-opacity-30 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${item.complete}%` }}
+                      transition={{ delay: idx * 0.1, duration: 0.8 }}
+                      viewport={{ once: true }}
+                      className="h-full bg-white"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <a
+              href="mailto:sukritvemula@outlook.com"
+              className="px-8 py-4 bg-white text-blue-600 font-mono font-bold text-sm sm:text-base tracking-widest uppercase hover:bg-blue-50 transition-colors border-2 border-white"
+            >
+              Let's Talk
+            </a>
+            <a
+              href="mailto:sukritvemula@outlook.com?subject=SCRAPR Investment Interest"
+              className="px-8 py-4 border-2 border-white text-white font-mono font-bold text-sm sm:text-base tracking-widest uppercase hover:bg-white hover:text-blue-600 transition-colors"
+            >
+              Investment Inquiry
+            </a>
+          </div>
+          <p className="text-xs sm:text-sm text-blue-100 font-sans text-center">
+            Founded in India • Bootstrapped • Pre-seed • PH Featured • YC/VC Pitch Ready
+          </p>
+        </div>
+      </section>
+
+      {/* THE PITCH */}
+      <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <p className="font-mono text-xs text-muted-foreground tracking-widest mb-2 sm:mb-3 uppercase">Why We're Raising</p>
+            <h3 className="text-lg sm:text-2xl md:text-4xl font-mono font-bold tracking-tight text-foreground mb-8 sm:mb-10">
+              The Real Problem We're Solving
+            </h3>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="border-2 border-foreground p-6 space-y-4"
+            >
+              <h4 className="font-mono text-lg font-bold text-foreground">Bootstrapped MVP</h4>
+              <p className="text-sm text-muted-foreground font-sans leading-relaxed">
+                Built SCRAPR to solve our own data extraction pain points. Validated the market on Product Hunt. Now we're raising seed to:
+              </p>
+              <ul className="space-y-2 text-sm font-sans text-muted-foreground">
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>Scale hosting and infrastructure globally</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>Build the team and accelerate product</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>Go-to-market for AI agent ecosystem</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>Target YC & tier-1 VC backing</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="border-2 border-foreground p-6 space-y-4"
+            >
+              <h4 className="font-mono text-lg font-bold text-foreground">The Opportunity</h4>
+              <p className="text-sm text-muted-foreground font-sans leading-relaxed">
+                Web scraping is a $300M+ market. AI agents need clean data. We're building the infrastructure layer for the agentic era.
+              </p>
+              <ul className="space-y-2 text-sm font-sans text-muted-foreground">
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>Zero-maintenance = lower churn</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>10x cheaper = massive TAM</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>A/I-ready positioning = future-proof</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-foreground">→</span>
+                  <span>Founder-led from India = lean unit economics</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -396,6 +536,162 @@ const Index = () => {
             </div>
           </div>
         </ScrollReveal>
+      </section>
+
+      {/* PERFORMANCE METRICS */}
+      <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <p className="font-mono text-xs text-muted-foreground tracking-widest mb-2 sm:mb-3 uppercase">Performance</p>
+            <h3 className="text-lg sm:text-2xl md:text-4xl font-mono font-bold tracking-tight text-foreground mb-8 sm:mb-10">
+              Speed That Speaks for Itself
+            </h3>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Speed Comparison Chart */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="border-2 border-foreground p-6"
+            >
+              <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-6">Response Time Comparison (ms)</p>
+              <div className="space-y-4">
+                {[
+                  { name: "SCRAPR", time: 200, width: 25 },
+                  { name: "Puppeteer", time: 10000, width: 100 },
+                  { name: "Scrapy", time: 3000, width: 30 },
+                  { name: "Bright Data", time: 5000, width: 50 },
+                ].map((item, idx) => (
+                  <div key={idx}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-mono text-xs text-foreground">{item.name}</span>
+                      <span className="font-mono text-xs text-muted-foreground">{item.time}ms</span>
+                    </div>
+                    <div className="h-3 border border-foreground bg-background overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${item.width}%` }}
+                        transition={{ delay: idx * 0.1, duration: 0.6 }}
+                        viewport={{ once: true }}
+                        className={`h-full ${idx === 0 ? "bg-foreground" : "bg-muted-foreground"}`}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Cost vs Complexity */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="border-2 border-foreground p-6"
+            >
+              <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-6">Setup Time vs Maintenance</p>
+              <div className="space-y-3">
+                {[
+                  { name: "SCRAPR", setup: 0, maintenance: 0, difficulty: "Minimal" },
+                  { name: "Puppeteer", setup: 30, maintenance: 20, difficulty: "High" },
+                  { name: "Scrapy", setup: 45, maintenance: 25, difficulty: "Very High" },
+                  { name: "Bright Data", setup: 15, maintenance: 15, difficulty: "Medium" },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 pb-2 border-b border-foreground border-opacity-30 last:border-b-0">
+                    <span className="font-mono text-xs text-foreground min-w-28">{item.name}</span>
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <div
+                          key={i}
+                          className={`w-3 h-3 border border-foreground ${
+                            idx === 0
+                              ? i === 0
+                                ? "bg-foreground"
+                                : "bg-background"
+                              : i < Math.ceil((item.setup + item.maintenance) / 10)
+                              ? "bg-foreground"
+                              : "bg-background"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="font-mono text-xs text-muted-foreground ml-auto">{item.difficulty}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS FLOW DIAGRAM */}
+      <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-12 sm:py-16 border-t border-foreground">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <p className="font-mono text-xs text-muted-foreground tracking-widest mb-2 sm:mb-3 uppercase">The Flow</p>
+            <h3 className="text-lg sm:text-2xl md:text-4xl font-mono font-bold tracking-tight text-foreground mb-8 sm:mb-10">
+              How SCRAPR Works
+            </h3>
+          </ScrollReveal>
+
+          {/* Visual Flow - Desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="border-2 border-foreground p-8 mb-12 bg-secondary hidden md:block"
+          >
+            <div className="flex items-center justify-between">
+              {[
+                { icon: Code, label: "URL IN" },
+                { icon: GitBranch, label: "INTERCEPT" },
+                { icon: Database, label: "PARSE" },
+                { icon: Cpu, label: "JSON OUT" },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center flex-1">
+                  <div className="flex flex-col items-center gap-2 flex-1">
+                    <motion.div
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: idx * 0.1 }}
+                    >
+                      {<item.icon className="w-8 h-8 text-foreground" />}
+                    </motion.div>
+                    <p className="font-mono text-xs text-muted-foreground text-center">{item.label}</p>
+                  </div>
+                  {idx < 3 && <p className="font-mono text-2xl text-foreground flex-shrink-0 mx-2">→</p>}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Visual Flow - Mobile */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="border-2 border-foreground p-6 mb-12 bg-secondary md:hidden space-y-4"
+          >
+            {[
+              { icon: Code, label: "URL IN" },
+              { icon: GitBranch, label: "INTERCEPT" },
+              { icon: Database, label: "PARSE" },
+              { icon: Cpu, label: "JSON OUT" },
+            ].map((item, idx) => (
+              <div key={idx}>
+                <div className="flex items-center gap-3 mb-3">
+                  {<item.icon className="w-6 h-6 text-foreground flex-shrink-0" />}
+                  <p className="font-mono text-sm font-bold text-foreground">{item.label}</p>
+                </div>
+                {idx < 3 && <div className="flex justify-center mb-3"><p className="font-mono text-lg text-foreground">↓</p></div>}
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* PROCESS */}
@@ -977,36 +1273,74 @@ print(result.json())`,
             </h3>
           </ScrollReveal>
           <ScrollReveal direction="up">
-            <div className="overflow-x-auto">
-              <table className="w-full text-xs font-sans border-collapse">
+            {/* Desktop Table */}
+            <div className="hidden md:block overflow-x-auto w-full">
+              <table className="w-full border-collapse">
                 <thead>
                   <tr>
-                    <th className="font-mono font-bold text-foreground text-left py-2 sm:py-3 px-2 sm:px-3 border-b-2 border-foreground text-xs">Feature</th>
-                    <th className="font-mono font-bold text-foreground text-center py-2 sm:py-3 px-1 sm:px-3 border-b-2 border-foreground text-xs">SCRAPR</th>
-                    <th className="font-mono font-bold text-foreground text-center py-2 sm:py-3 px-1 sm:px-3 border-b-2 border-foreground text-xs">Puppeteer</th>
-                    <th className="font-mono font-bold text-foreground text-center py-2 sm:py-3 px-1 sm:px-3 border-b-2 border-foreground text-xs">Scrapy</th>
-                    <th className="font-mono font-bold text-foreground text-center py-2 sm:py-3 px-1 sm:px-3 border-b-2 border-foreground text-xs">Bright Data</th>
+                    <th className="font-mono font-bold text-foreground text-left py-3 px-4 border-b-2 border-foreground text-xs">Feature</th>
+                    <th className="font-mono font-bold text-foreground text-center py-3 px-4 border-b-2 border-foreground text-xs bg-secondary">SCRAPR</th>
+                    <th className="font-mono font-bold text-foreground text-center py-3 px-4 border-b-2 border-foreground text-xs">Puppeteer</th>
+                    <th className="font-mono font-bold text-foreground text-center py-3 px-4 border-b-2 border-foreground text-xs">Scrapy</th>
+                    <th className="font-mono font-bold text-foreground text-center py-3 px-4 border-b-2 border-foreground text-xs">Bright Data</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { feature: "Speed", values: ["<200ms", "5-15s", "1-5s", "2-8s"] },
-                    { feature: "Browser Required", values: ["NO", "YES", "NO", "YES"] },
-                    { feature: "Network Interception", values: ["YES", "NO", "NO", "NO"] },
-                    { feature: "File Formats", values: ["ALL", "HTML", "HTML", "HTML"] },
-                    { feature: "Setup Time", values: ["0 min", "30+ min", "45+ min", "15+ min"] },
+                    { feature: "Speed", data: [{ val: "<200ms", good: true }, { val: "5-15s", good: false }, { val: "1-5s", good: false }, { val: "2-8s", good: false }] },
+                    { feature: "Browser Required", data: [{ val: "NO", good: true }, { val: "YES", good: false }, { val: "NO", good: true }, { val: "YES", good: false }] },
+                    { feature: "Network Interception", data: [{ val: "YES", good: true }, { val: "NO", good: false }, { val: "NO", good: false }, { val: "NO", good: false }] },
+                    { feature: "File Formats", data: [{ val: "ALL", good: true }, { val: "HTML", good: false }, { val: "HTML", good: false }, { val: "HTML", good: false }] },
+                    { feature: "Setup Time", data: [{ val: "0 min", good: true }, { val: "30+ min", good: false }, { val: "45+ min", good: false }, { val: "15+ min", good: false }] },
                   ].map((row, idx) => (
-                    <tr key={row.feature} className={idx % 2 === 0 ? "bg-secondary" : ""}>
-                      <td className="font-mono font-bold text-foreground py-2 sm:py-3 px-2 sm:px-3 border-b border-foreground text-xs">{row.feature}</td>
-                      {row.values.map((val, i) => (
-                        <td key={i} className="text-center text-muted-foreground py-2 sm:py-3 px-1 sm:px-3 border-b border-foreground font-sans text-xs">
-                          {val}
+                    <tr key={row.feature} className={idx % 2 === 0 ? "bg-secondary bg-opacity-20" : ""}>
+                      <td className="font-mono font-bold text-foreground py-3 px-4 border-b border-foreground text-xs text-left">{row.feature}</td>
+                      {row.data.map((item, i) => (
+                        <td key={i} className={`text-center py-3 px-4 border-b border-foreground text-xs ${i === 0 ? "bg-secondary bg-opacity-40" : ""}`}>
+                          <div className="flex items-center justify-center gap-2 font-mono">
+                            <span className={item.good ? "font-bold text-foreground" : "text-muted-foreground"}>{item.val}</span>
+                            {item.good ? (
+                              <Check className="w-3.5 h-3.5 text-foreground" />
+                            ) : (
+                              <X className="w-3.5 h-3.5 text-muted-foreground opacity-40" />
+                            )}
+                          </div>
                         </td>
                       ))}
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile Cards */}
+            <div className="md:hidden space-y-4">
+              {[
+                { feature: "Speed", data: [{ tool: "SCRAPR", val: "<200ms", good: true }, { tool: "Puppeteer", val: "5-15s", good: false }, { tool: "Scrapy", val: "1-5s", good: false }, { tool: "Bright Data", val: "2-8s", good: false }] },
+                { feature: "Browser Required", data: [{ tool: "SCRAPR", val: "NO", good: true }, { tool: "Puppeteer", val: "YES", good: false }, { tool: "Scrapy", val: "NO", good: true }, { tool: "Bright Data", val: "YES", good: false }] },
+                { feature: "Network Interception", data: [{ tool: "SCRAPR", val: "YES", good: true }, { tool: "Puppeteer", val: "NO", good: false }, { tool: "Scrapy", val: "NO", good: false }, { tool: "Bright Data", val: "NO", good: false }] },
+                { feature: "File Formats", data: [{ tool: "SCRAPR", val: "ALL", good: true }, { tool: "Puppeteer", val: "HTML", good: false }, { tool: "Scrapy", val: "HTML", good: false }, { tool: "Bright Data", val: "HTML", good: false }] },
+                { feature: "Setup Time", data: [{ tool: "SCRAPR", val: "0 min", good: true }, { tool: "Puppeteer", val: "30+ min", good: false }, { tool: "Scrapy", val: "45+ min", good: false }, { tool: "Bright Data", val: "15+ min", good: false }] },
+              ].map((row, idx) => (
+                <motion.div key={row.feature} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }} viewport={{ once: true }} className="border-2 border-foreground p-4 space-y-3">
+                  <p className="font-mono font-bold text-foreground text-sm">{row.feature}</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {row.data.map((item, i) => (
+                      <div key={i} className={`border border-foreground p-3 flex flex-col items-center gap-1 ${item.good ? "bg-secondary" : ""}`}>
+                        <span className="font-mono text-xs text-muted-foreground text-center">{item.tool}</span>
+                        <div className="flex items-center gap-1 justify-center">
+                          <span className={`font-mono text-xs font-bold ${item.good ? "text-foreground" : "text-muted-foreground"}`}>{item.val}</span>
+                          {item.good ? (
+                            <Check className="w-3 h-3 text-foreground" />
+                          ) : (
+                            <X className="w-3 h-3 text-muted-foreground opacity-40" />
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </ScrollReveal>
         </div>
