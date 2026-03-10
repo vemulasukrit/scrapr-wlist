@@ -88,10 +88,18 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              {["AVG RESPONSE < 200MS", "MCP NATIVE", "REST + JSON", "FREE TO START"].map((pill, i) => (
+              {["WAITLIST", "IN DEVELOPMENT", "SEEKING FUNDRAISERS", "FREE TO JOIN"].map((pill, i) => (
                 <motion.span
                   key={pill}
-                  className="font-mono text-[11px] sm:text-xs border border-foreground px-2 sm:px-3 py-1 sm:py-2 text-foreground tracking-wide hover:bg-foreground hover:text-background transition-colors"
+                  className={`font-mono text-[11px] sm:text-xs border px-2 sm:px-3 py-1 sm:py-2 tracking-wide hover:opacity-80 transition-all ${
+                    pill === "WAITLIST"
+                      ? "bg-blue-500 text-white border-blue-500"
+                      : pill === "IN DEVELOPMENT"
+                      ? "bg-amber-500 text-white border-amber-500"
+                      : pill === "SEEKING FUNDRAISERS"
+                      ? "bg-emerald-500 text-white border-emerald-500"
+                      : "border-foreground text-foreground"
+                  }`}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.15 + i * 0.08 }}
@@ -139,7 +147,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.75 }}
             >
-              Turn any URL into structured data. No browsers. No code. No API keys for sources.
+              The data layer for the agentic era. Transform any URL into clean, structured APIs without maintenance headaches. Zero-browser approach means 10x faster, 1/10th the cost of traditional scraping. Currently in development—join the waitlist for early access.
             </motion.p>
 
             <motion.div
@@ -148,7 +156,15 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.95 }}
             >
-              <WaitlistForm source="hero" />
+              <div className="mb-4">
+                <p className="text-xs sm:text-sm text-foreground font-mono mb-3 tracking-widest uppercase">
+                  Build Your First API
+                </p>
+                <WaitlistForm source="hero" />
+              </div>
+              <p className="text-xs text-muted-foreground font-sans mt-3">
+                Interested in fundraising opportunities? <a href="mailto:sukritvemula@outlook.com" className="text-blue-500 hover:underline">Connect with us</a>
+              </p>
             </motion.div>
           </div>
 
@@ -205,6 +221,44 @@ const Index = () => {
               </div>
               <p className="text-xs text-muted-foreground font-sans leading-relaxed">Instant extraction into JSON or any format</p>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FUNDRAISING CTA */}
+      <section className="px-4 sm:px-6 md:px-16 lg:px-32 py-16 sm:py-20 md:py-24 border-t border-foreground bg-gradient-to-br from-blue-500 to-blue-600">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <p className="font-mono text-xs sm:text-sm text-blue-100 tracking-widest mb-4 uppercase">💰 We're Fundraising</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-mono font-bold text-white mb-4 sm:mb-6 leading-tight">
+              Join Us in Building<br />the Future of Data
+            </h2>
+            <p className="text-base sm:text-lg text-blue-50 font-sans max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
+              SCRAPR is raising to expand globally and scale the infrastructure that powers the next generation of AI agents. We're looking for strategic investors and partners who believe in zero-maintenance data extraction.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="mailto:sukritvemula@outlook.com"
+                className="px-8 py-4 bg-white text-blue-600 font-mono font-bold text-sm sm:text-base tracking-widest uppercase hover:bg-blue-50 transition-colors border-2 border-white"
+              >
+                Let's Talk
+              </a>
+              <a
+                href="mailto:sukritvemula@outlook.com?subject=SCRAPR Investment Interest"
+                className="px-8 py-4 border-2 border-white text-white font-mono font-bold text-sm sm:text-base tracking-widest uppercase hover:bg-white hover:text-blue-600 transition-colors"
+              >
+                Investment Inquiry
+              </a>
+            </div>
+            <p className="text-xs sm:text-sm text-blue-100 font-sans mt-8">
+              Based in San Francisco • Backed by founders • Seed stage • Multiple rounds of funding discussions in progress
+            </p>
           </motion.div>
         </div>
       </section>
@@ -319,16 +373,16 @@ const Index = () => {
         <ScrollReveal>
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-2 sm:mb-3">
-              THE API FOR
+              STOP FIXING
             </h2>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-2 sm:mb-3">
-              THE ENTIRE
+              BROKEN SCRAPERS
             </h2>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold tracking-tight text-foreground text-center mb-6 sm:mb-8">
-              INTERNET
+              START SCALING DATA
             </h2>
             <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
-              {["Every site.", "Every action.", "One API."].map((text, idx) => (
+              {["Zero maintenance.", "Network-native.", "AI-ready."].map((text, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 10 }}
@@ -355,9 +409,9 @@ const Index = () => {
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {[
-              { num: "01", title: "Send a URL", desc: "Drop any URL into the API. Webpage, PDF, DOCX, XLSX, feed." },
-              { num: "02", title: "Engine intercepts", desc: "SCRAPR reverse-engineers the site's real network calls." },
-              { num: "03", title: "Get clean JSON", desc: "Structured data back in under 200ms. No parsing needed." },
+              { num: "01", title: "Send a URL", desc: "Drop any URL into the API. Works with webpages, PDFs, spreadsheets, feeds—anything." },
+              { num: "02", title: "Network interception", desc: "We intercept the actual API calls the site makes. No brittle selectors. No maintenance." },
+              { num: "03", title: "Structured data", desc: "Clean JSON in <200ms. Enterprise-grade extraction at 1/10th the cost of headless browsers." },
             ].map((step, i) => (
               <ScrollReveal key={step.num} delay={i * 0.2}>
                 <motion.div
@@ -1018,8 +1072,8 @@ print(result.json())`,
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold text-foreground mb-4 sm:mb-6 text-center">Ready to parse anything?</h3>
-              <p className="text-sm sm:text-base text-muted-foreground font-sans text-center mb-8 sm:mb-10 max-w-2xl mx-auto">Join thousands of developers using SCRAPR to extract structured data from any website instantly.</p>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold text-foreground mb-4 sm:mb-6 text-center">Join the data layer for AI agents.</h3>
+              <p className="text-sm sm:text-base text-muted-foreground font-sans text-center mb-8 sm:mb-10 max-w-2xl mx-auto">Get early access to SCRAPR—the infrastructure powering the next generation of AI-native data workflows. Enterprise-grade extraction without the maintenance headaches or the enterprise price tag.</p>
               <div className="flex justify-center mb-12 sm:mb-16">
                 <WaitlistForm source="footer" />
               </div>
