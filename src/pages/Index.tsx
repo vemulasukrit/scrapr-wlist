@@ -248,7 +248,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
             {[
               { icon: TrendingUp, label: "Product Hunt", value: "#5", desc: "Featured & validated" },
-              { icon: BarChart3, label: "Waitlist", value: "402", desc: "Pre-launch signups" },
+              { icon: BarChart3, label: "Waitlist", value: "400+", desc: "Pre-launch signups" },
               { icon: Database, label: "Bootstrapped", value: "MVP", desc: "Ready to scale" },
             ].map((stat, idx) => {
               const Icon = stat.icon;
