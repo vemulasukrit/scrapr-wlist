@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
+        sans: ["'Space Grotesk'", "'Inter'", "sans-serif"],
+        body: ["'Inter'", "sans-serif"],
         mono: ["'IBM Plex Mono'", "monospace"],
-        sans: ["'Inter'", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -70,9 +71,9 @@ export default {
         },
       },
       borderRadius: {
-        lg: "4px",
-        md: "4px",
-        sm: "2px",
+        lg: "12px",
+        md: "8px",
+        sm: "4px",
       },
       keyframes: {
         "accordion-down": {

@@ -1,5 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 interface WaitlistFormProps {
   source: "hero" | "footer";
@@ -30,38 +32,64 @@ const WaitlistForm = ({ source }: WaitlistFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-0">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
-        disabled={status === "success"}
-        className="flex-1 px-4 py-3 border border-foreground bg-background text-foreground font-mono text-sm focus:outline-none focus:border-accent disabled:opacity-50 placeholder:text-muted-foreground"
-      />
-      <button
-        type="submit"
-        disabled={status === "loading" || status === "success"}
-        className="px-6 py-3 bg-foreground text-primary-foreground font-mono text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-80 disabled:opacity-50 border border-foreground"
-      >
-        {status === "loading" ? "..." : "Get Early Access"}
-      </button>
+    <div className="w-full max-w-lg mx-auto">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            disabled={status === "success"}
+            className="w-full h-full px-6 py-3.5 rounded-full bg-black/40 backdrop-blur-md border border-white/[0.15] text-white font-body text-base outline-none hover:bg-black/60 hover:border-white/[0.25] focus:border-white/[0.4] focus:bg-black/80 disabled:opacity-50 placeholder:text-white/40 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.5)]"
+          />
+        </div>
+        <motion.button
+          type="submit"
+          disabled={status === "loading" || status === "success"}
+          className="px-8 py-3.5 rounded-full bg-gradient-to-b from-white to-white/90 text-black font-sans font-bold text-sm tracking-wide uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105 disabled:opacity-50 flex items-center justify-center gap-2 border border-white/20 whitespace-nowrap"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          {status === "loading" ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <>
+              Join Waitlist
+              <ArrowRight className="w-4 h-4" />
+            </>
+          )}
+        </motion.button>
+      </form>
+
       {status === "success" && (
-        <p className="sm:ml-4 mt-2 sm:mt-0 self-center font-mono text-xs text-muted-foreground">
-          you're on the list. we'll be in touch.
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mt-4 text-sm text-white/50 font-body"
+        >
+          You're on the list. We'll be in touch ✦
+        </motion.p>
       )}
       {status === "duplicate" && (
-        <p className="sm:ml-4 mt-2 sm:mt-0 self-center font-mono text-xs text-muted-foreground">
-          already on the list.
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mt-4 text-sm text-white/50 font-body"
+        >
+          Already on the list.
+        </motion.p>
       )}
       {status === "error" && (
-        <p className="sm:ml-4 mt-2 sm:mt-0 self-center font-mono text-xs text-terminal-red">
-          something went wrong. try again.
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mt-4 text-sm text-red-400/70 font-body"
+        >
+          Something went wrong. Try again.
+        </motion.p>
       )}
-    </form>
+    </div>
   );
 };
 
