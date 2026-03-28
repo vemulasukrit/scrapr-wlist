@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 
-const WaitlistCounter = () => {
+interface WaitlistCounterProps {
+  dark?: boolean;
+}
+
+const WaitlistCounter = ({ dark = false }: WaitlistCounterProps) => {
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
@@ -18,21 +22,29 @@ const WaitlistCounter = () => {
   if (count === null) return null;
 
   return (
-    <section className="py-20 sm:py-28 text-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true }}
+      className="flex items-center gap-3"
+    >
+      <span
+        className="font-sans font-extrabold text-3xl sm:text-4xl tracking-tight"
+        style={{
+          background: "linear-gradient(135deg, #C17B2A 0%, #E8A94D 50%, #C17B2A 100%)",
+          backgroundSize: "200% auto",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
       >
-        <p className="text-5xl sm:text-7xl font-sans font-bold text-foreground text-glow tracking-tight">
-          {count.toLocaleString()}
-        </p>
-        <p className="text-sm text-white/40 mt-3 tracking-[0.2em] uppercase font-body">
-          engineers already waiting
-        </p>
-      </motion.div>
-    </section>
+        {count.toLocaleString()}+
+      </span>
+      <span className={`text-sm font-body ${dark ? "text-white/40" : "text-stone-500"}`}>
+        engineers on the waitlist
+      </span>
+    </motion.div>
   );
 };
 

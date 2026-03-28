@@ -1,13 +1,14 @@
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 
 interface WaitlistFormProps {
   source: "hero" | "footer";
+  dark?: boolean;
 }
 
-const WaitlistForm = ({ source }: WaitlistFormProps) => {
+const WaitlistForm = ({ source, dark = false }: WaitlistFormProps) => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "duplicate" | "error">("idle");
 
@@ -31,60 +32,77 @@ const WaitlistForm = ({ source }: WaitlistFormProps) => {
     }
   };
 
+  if (status === "success") {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className={`flex items-center gap-3 px-6 py-4 rounded-full border ${
+          dark
+            ? "bg-white/[0.05] border-white/10 text-white/70"
+            : "bg-amber-50 border-amber-200/60 text-amber-800"
+        }`}
+      >
+        <CheckCircle2 className={`w-4 h-4 flex-shrink-0 ${dark ? "text-amber-400" : "text-amber-600"}`} />
+        <span className="font-body text-sm">You're in. We'll reach out when doors open.</span>
+      </motion.div>
+    );
+  }
+
   return (
     <div className="w-full max-w-lg mx-auto">
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5">
         <div className="relative flex-1">
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            disabled={status === "success"}
-            className="w-full h-full px-6 py-3.5 rounded-full bg-black/40 backdrop-blur-md border border-white/[0.15] text-white font-body text-base outline-none hover:bg-black/60 hover:border-white/[0.25] focus:border-white/[0.4] focus:bg-black/80 disabled:opacity-50 placeholder:text-white/40 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.5)]"
+            placeholder="your@email.com"
+            disabled={status === "loading"}
+            className={`w-full px-5 py-3.5 rounded-full font-body text-sm outline-none transition-all duration-300 disabled:opacity-50 placeholder:font-body ${
+              dark
+                ? "bg-white/[0.06] border border-white/10 text-white placeholder:text-white/30 focus:border-amber-400/50 focus:bg-white/[0.09] focus:shadow-[0_0_0_3px_rgba(193,123,42,0.15)]"
+                : "bg-white border border-black/8 text-stone-800 placeholder:text-stone-400 shadow-sm focus:border-amber-400/70 focus:shadow-[0_0_0_3px_rgba(193,123,42,0.12)]"
+            }`}
           />
         </div>
         <motion.button
           type="submit"
-          disabled={status === "loading" || status === "success"}
-          className="px-8 py-3.5 rounded-full bg-gradient-to-b from-white to-white/90 text-black font-sans font-bold text-sm tracking-wide uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105 disabled:opacity-50 flex items-center justify-center gap-2 border border-white/20 whitespace-nowrap"
-          whileHover={{ scale: 1.02 }}
+          disabled={status === "loading"}
+          className="px-7 py-3.5 rounded-full font-sans font-semibold text-sm tracking-wide transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+          style={{
+            background: "linear-gradient(135deg, #C17B2A 0%, #A86720 100%)",
+            color: "#FDFBF7",
+            boxShadow: "0 2px 12px rgba(193,123,42,0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
+          }}
+          whileHover={{ scale: 1.02, boxShadow: "0 4px 24px rgba(193,123,42,0.45), inset 0 1px 0 rgba(255,255,255,0.15)" }}
           whileTap={{ scale: 0.98 }}
         >
           {status === "loading" ? (
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
             <>
-              Join Waitlist
+              Get Early Access
               <ArrowRight className="w-4 h-4" />
             </>
           )}
         </motion.button>
       </form>
 
-      {status === "success" && (
-        <motion.p
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mt-4 text-sm text-white/50 font-body"
-        >
-          You're on the list. We'll be in touch ✦
-        </motion.p>
-      )}
       {status === "duplicate" && (
         <motion.p
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mt-4 text-sm text-white/50 font-body"
+          className={`text-center mt-3 text-xs font-body ${dark ? "text-white/40" : "text-stone-500"}`}
         >
-          Already on the list.
+          Already registered — we've got you.
         </motion.p>
       )}
       {status === "error" && (
         <motion.p
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mt-4 text-sm text-red-400/70 font-body"
+          className="text-center mt-3 text-xs text-red-500 font-body"
         >
           Something went wrong. Try again.
         </motion.p>

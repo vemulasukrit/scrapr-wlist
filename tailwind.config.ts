@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["'Space Grotesk'", "'Inter'", "sans-serif"],
-        body: ["'Inter'", "sans-serif"],
-        mono: ["'IBM Plex Mono'", "monospace"],
+        sans: ["'Syne'", "sans-serif"],
+        body: ["'DM Sans'", "sans-serif"],
+        mono: ["'Geist Mono'", "'IBM Plex Mono'", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -53,27 +53,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        terminal: {
-          bg: "hsl(var(--terminal-bg))",
-          border: "hsl(var(--terminal-border))",
-          green: "hsl(var(--terminal-green))",
-          red: "hsl(var(--terminal-red))",
-        },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        amber: {
+          DEFAULT: "#C17B2A",
+          light: "#E8A94D",
+          dark: "#8A5415",
         },
       },
       borderRadius: {
-        lg: "12px",
-        md: "8px",
-        sm: "4px",
+        lg: "14px",
+        md: "10px",
+        sm: "5px",
       },
       keyframes: {
         "accordion-down": {
