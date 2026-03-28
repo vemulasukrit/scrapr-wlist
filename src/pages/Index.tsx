@@ -1,14 +1,14 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import WaitlistForm from "@/components/WaitlistForm";
 import WaitlistCounter from "@/components/WaitlistCounter";
 import {
   ChevronRight, Zap, Database, Cpu, Code,
   Check, Menu, XIcon, RefreshCw, ArrowRight,
   Shield, Bot, TrendingUp, Network, Globe, Layers,
+  MapPin, BookOpen, FileText, Terminal
 } from "lucide-react";
 
-/* ─── ANIMATION PRESETS ─── */
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
@@ -18,113 +18,41 @@ const fadeUp = (delay = 0) => ({
 
 const NAV_LINKS = [
   { label: "How It Works", href: "#how" },
-  { label: "API", href: "#api" },
+  { label: "Docs", href: "#docs" },
+  { label: "Maps", href: "#maps" },
   { label: "Traction", href: "#traction" },
   { label: "Investors", href: "#invest" },
 ];
 
-/* ─── CUSTOM CURSOR ─── */
-const CustomCursor = () => {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [trail, setTrail] = useState({ x: -100, y: -100 });
-  const [clicking, setClicking] = useState(false);
-  const [hovering, setHovering] = useState(false);
-  useEffect(() => {
-    const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
-    const down = () => setClicking(true);
-    const up = () => setClicking(false);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
-    // hover detection on interactive elements
-    const addHover = () => {
-      document.querySelectorAll("a,button,input,[data-cursor]").forEach(el => {
-        el.addEventListener("mouseenter", () => setHovering(true));
-        el.addEventListener("mouseleave", () => setHovering(false));
-      });
-    };
-    addHover();
-    const interval = setInterval(addHover, 2000);
-    return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
-      clearInterval(interval);
-    };
-  }, []);
-  useEffect(() => {
-    let frame: number;
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-    const animate = () => {
-      setTrail(prev => ({ x: lerp(prev.x, pos.x, 0.12), y: lerp(prev.y, pos.y, 0.12) }));
-      frame = requestAnimationFrame(animate);
-    };
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [pos]);
-  return (
-    <>
-      {/* Main dot */}
-      <div className="fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
-        style={{ left: pos.x, top: pos.y, transition: "transform 0.05s" }}>
-        <div className={`rounded-full transition-all duration-150 ${clicking ? "scale-50" : "scale-100"} ${hovering ? "w-2 h-2 bg-amber-500" : "w-2 h-2 bg-stone-900"}`} />
-      </div>
-      {/* Trailing ring */}
-      <div className="fixed pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2"
-        style={{ left: trail.x, top: trail.y }}>
-        <div className={`rounded-full border transition-all duration-200 ${hovering ? "w-9 h-9 border-amber-400/60 scale-110" : "w-6 h-6 border-stone-400/40"} ${clicking ? "scale-150 opacity-30" : ""}`} />
-      </div>
-      <style>{`* { cursor: none !important; }`}</style>
-    </>
-  );
-};
 
-/* ─── TICKER ─── */
-const TickerBar = () => {
-  const items = "SCRAPR — #5 PRODUCT OF THE DAY ON PRODUCT HUNT ✦ 500+ B2B SIGNUPS IN 72 HOURS ✦ PRIVATE BETA ✦ AI-NATIVE DATA EXTRACTION ✦ SUB-200MS ✦ ".repeat(6);
-  return (
-    <div className="overflow-hidden py-2 border-b-2 border-stone-900 bg-stone-900">
-      <div className="animate-ticker whitespace-nowrap flex">
-        <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-amber-400/80 mr-0">{items}</span>
-        <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-amber-400/80">{items}</span>
-      </div>
-    </div>
-  );
-};
 
-/* ─── BRUTALIST NAV ─── */
 const Nav = ({ onMobileOpen }: { onMobileOpen: () => void }) => (
-  <motion.nav className="sticky top-0 z-50 bg-[#F7F4EE] border-b-2 border-stone-900"
+  <motion.nav className="sticky top-0 z-50 bg-white border-b-2 border-stone-900"
     initial={{ y: -60, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
-    <div className="max-w-7xl mx-auto flex items-stretch h-14">
-      {/* Logo block */}
-      <a href="#" className="flex items-center gap-2.5 px-6 border-r-2 border-stone-900 hover:bg-stone-900 hover:text-white transition-colors duration-200 group">
-        <img src="/images/logo - nobg.png" alt="SCRAPR" className="w-5 h-5 object-contain group-hover:invert transition-all" style={{ filter: "sepia(0.5) saturate(1.5) hue-rotate(10deg) brightness(0.6)" }} />
-        <span className="font-sans font-extrabold text-base tracking-tight text-stone-900 group-hover:text-white transition-colors">SCRAPR</span>
+    transition={{ duration: 0.6 }}>
+    <div className="max-w-7xl mx-auto flex items-stretch h-12">
+      <a href="#" className="flex items-center gap-2 px-5 border-r border-stone-900 hover:bg-stone-900 transition-colors">
+        <span className="font-bold text-sm tracking-tight text-stone-900">SCRAPR</span>
       </a>
-      {/* Nav links */}
       <div className="hidden md:flex items-center flex-1">
         {NAV_LINKS.map((item) => (
           <a key={item.label} href={item.href}
-            className="h-full flex items-center px-6 font-mono text-[11px] tracking-[0.18em] uppercase text-stone-600 border-r border-stone-200 hover:bg-stone-900 hover:text-white transition-all duration-150">
+            className="h-full flex items-center px-4 font-mono text-[10px] tracking-wider uppercase text-stone-500 border-r border-stone-200 hover:text-stone-900 transition-colors">
             {item.label}
           </a>
         ))}
       </div>
-      {/* CTA */}
       <a href="#hero-form"
-        className="hidden sm:flex items-center gap-2 ml-auto px-6 font-sans font-bold text-xs tracking-wide uppercase bg-stone-900 text-white hover:bg-amber-600 transition-colors duration-200 border-l-2 border-stone-900">
-        Get Early Access <ArrowRight className="w-3.5 h-3.5" />
+        className="hidden sm:flex items-center gap-2 ml-auto px-5 font-bold text-xs tracking-wide uppercase bg-stone-900 text-white hover:bg-amber-500 hover:text-stone-900 transition-colors">
+        Join
       </a>
-      <button className="md:hidden flex items-center px-4 border-l-2 border-stone-900" onClick={onMobileOpen}>
-        <Menu className="w-5 h-5 text-stone-700" />
+      <button className="md:hidden flex items-center px-4 border-l border-stone-900" onClick={onMobileOpen}>
+        <Menu className="w-4 h-4 text-stone-700" />
       </button>
     </div>
   </motion.nav>
 );
 
-/* ─── MOBILE NAV ─── */
 const MobileNav = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
   <AnimatePresence>
     {isOpen && (
@@ -151,7 +79,6 @@ const MobileNav = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
   </AnimatePresence>
 );
 
-/* ─── PIPELINE DIAGRAM ─── */
 const PipelineDiagram = () => {
   const steps = [
     { id: "URL", label: "Your URL", sub: "any website", color: "#E8EDF2", border: "#C8D4E0", text: "#3A5068" },
@@ -188,7 +115,6 @@ const PipelineDiagram = () => {
           </div>
         ))}
       </div>
-      {/* Speed badge */}
       <motion.div initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }} viewport={{ once: true }}
         className="mt-4 flex items-center gap-3">
@@ -200,10 +126,8 @@ const PipelineDiagram = () => {
   );
 };
 
-/* ─── API MOCKUP ─── */
 const ApiMockup = () => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-2 border-white/10 rounded-none overflow-hidden font-mono">
-    {/* Request */}
     <div className="border-r border-white/10">
       <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/10 bg-white/5">
         <span className="px-2 py-0.5 text-[10px] font-bold tracking-widest text-stone-900 bg-amber-400">POST</span>
@@ -220,7 +144,6 @@ const ApiMockup = () => (
         <span className="text-stone-500">{"}"}</span>
       </div>
     </div>
-    {/* Response */}
     <div>
       <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/10 bg-white/5">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -231,17 +154,105 @@ const ApiMockup = () => (
         <span className="text-stone-500">{"{"}</span><br />
         <span className="text-stone-400 pl-4">"status": </span><span className="text-emerald-400">"success"</span><span className="text-stone-500">,</span><br />
         <span className="text-stone-400 pl-4">"schema": </span><span className="text-amber-400">"auto-detected"</span><span className="text-stone-500">,</span><br />
-        <span className="text-stone-400 pl-4">"sections": </span><span className="text-stone-500">[</span><br />
-        <span className="text-stone-500 pl-8">{"{"} </span><span className="text-stone-400">"heading": </span><span className="text-amber-400">"AI"</span><span className="text-stone-500">, "items": </span><span className="text-blue-400">12</span><span className="text-stone-500"> {"}"},</span><br />
-        <span className="text-stone-500 pl-8">{"{"} </span><span className="text-stone-400">"heading": </span><span className="text-amber-400">"Robotics"</span><span className="text-stone-500">, "items": </span><span className="text-blue-400">8</span><span className="text-stone-500"> {"}"}</span><br />
-        <span className="text-stone-500 pl-4">]</span><br />
+        <span className="text-stone-400 pl-4">"data": </span><span className="text-stone-500">{"{"} ... {"}"}</span><br />
         <span className="text-stone-500">{"}"}</span>
       </div>
     </div>
   </div>
 );
 
-/* ─── FAQ ─── */
+const DocsSection = () => {
+  const docs = [
+    { icon: Terminal, title: "REST API", desc: "Simple JSON in, JSON out. v1 stable.", tag: "REFERENCE" },
+    { icon: BookOpen, title: "Quickstart", desc: "Get your API key in 30 seconds.", tag: "GUIDES" },
+    { icon: Shield, title: "Security", desc: "AES-256 encryption. SOC2 ready.", tag: "SECURITY" },
+    { icon: FileText, title: "SLA", desc: "99.9% uptime guarantee for enterprise.", tag: "ENTERPRISE" },
+  ];
+  return (
+    <section id="docs" className="py-24 px-4 sm:px-6 border-b-2 border-stone-900 bg-stone-50">
+      <div className="max-w-6xl mx-auto">
+        <motion.div {...fadeUp()} className="mb-12">
+          <p className="section-label mb-3">Documentation</p>
+          <h2 className="font-sans font-extrabold text-4xl sm:text-5xl tracking-tight text-stone-950 leading-[1.02]">
+            Built for developers.
+          </h2>
+        </motion.div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-2 border-stone-900 overflow-hidden">
+          {docs.map((d, i) => {
+            const Icon = d.icon;
+            return (
+              <motion.div key={i} {...fadeUp(i * 0.1)}
+                className={`p-6 flex flex-col gap-3 ${i < 3 ? "border-r-2 border-stone-900" : ""} ${i < 2 ? "sm:border-b-2 border-stone-900" : "sm:border-b-0"} border-b-2 border-stone-900 sm:border-b-0 hover:bg-amber-50/60 transition-colors duration-200`}>
+                <div className="flex items-center gap-2">
+                  <Icon className="w-4 h-4 text-stone-400" strokeWidth={1.5} />
+                  <span className="font-mono text-[9px] tracking-wider text-amber-600">{d.tag}</span>
+                </div>
+                <h3 className="font-sans font-bold text-base text-stone-900">{d.title}</h3>
+                <p className="font-body text-xs text-stone-500 leading-relaxed">{d.desc}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+        <motion.div {...fadeUp(0.2)} className="mt-8 border border-stone-200 p-4 bg-white">
+          <pre className="font-mono text-xs text-stone-600 overflow-x-auto">
+{`# Install SDK
+pip install scrapr-sdk
+
+# Make request
+import scrapr
+result = scrapr.extract("https://api.example.com")
+print(result.json)  # Already structured!`}
+          </pre>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const MapsSection = () => {
+  return (
+    <section id="maps" className="py-24 px-4 sm:px-6 border-b-2 border-stone-900 bg-stone-900 text-white">
+      <div className="max-w-6xl mx-auto">
+        <motion.div {...fadeUp()} className="mb-12">
+          <p className="font-mono text-[10px] tracking-[0.25em] uppercase mb-3" style={{ color: "#C17B2A" }}>Global Infrastructure</p>
+          <h2 className="font-sans font-extrabold text-4xl sm:text-5xl tracking-tight leading-[1.02]">
+            Worldwide coverage.
+          </h2>
+        </motion.div>
+        <motion.div {...fadeUp(0.1)} className="mb-8">
+          <div className="grid grid-cols-5 gap-2">
+            {[
+              { region: "USA", nodes: 156 },
+              { region: "Europe", nodes: 89 },
+              { region: "Asia", nodes: 124 },
+              { region: "LatAm", nodes: 45 },
+              { region: "Africa", nodes: 23 },
+            ].map(r => (
+              <div key={r.region} className="border border-white/10 p-4 text-center">
+                <div className="font-bold text-sm text-white mb-1">{r.region}</div>
+                <div className="font-mono text-xs text-amber-400">{r.nodes} nodes</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { val: "437+", lbl: "Active Nodes", color: "#E8A94D" },
+            { val: "190+", lbl: "Countries", color: "#E8A94D" },
+            { val: "50+", lbl: "Data Types", color: "#E8A94D" },
+            { val: "99.9%", lbl: "Success Rate", color: "#6ABF7A" },
+          ].map(m => (
+            <motion.div key={m.lbl} {...fadeUp()} className="border border-white/10 p-6 text-center">
+              <div className="font-sans font-extrabold text-4xl mb-1" style={{ color: m.color }}>{m.val}</div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-stone-500">{m.lbl}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const FAQItem = ({ question, answer, index }: { question: string; answer: string; index: number }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -263,12 +274,8 @@ const FAQItem = ({ question, answer, index }: { question: string; answer: string
   );
 };
 
-/* ─── DIVIDER ─── */
 const Divider = () => <div className="max-w-6xl mx-auto px-6"><div className="h-px bg-stone-200" /></div>;
 
-/* ════════════════════════════
-   MAIN PAGE
-════════════════════════════ */
 const Index = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -278,96 +285,44 @@ const Index = () => {
 
   return (
     <div className="min-h-screen text-foreground overflow-x-hidden bg-background relative">
-      <CustomCursor />
-      <TickerBar />
       <Nav onMobileOpen={() => setMobileOpen(true)} />
       <MobileNav isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
-      {/* ══ HERO ══ */}
-      <motion.section ref={heroRef} style={{ opacity: heroOpacity, y: heroY }}
-        className="relative overflow-hidden border-b-2 border-stone-900">
+      <section className="border-b-2 border-stone-900 bg-white">
+        <div className="max-w-7xl mx-auto px-6 py-12 sm:py-16">
+          <div className="flex gap-2 mb-4">
+            {["MVP", "SEEKING $500K", "PRE-SEED"].map((p) => (
+              <span key={p} className="font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1 bg-stone-900 text-white">
+                {p}
+              </span>
+            ))}
+          </div>
+          
+          <h1 className="font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-stone-950 leading-[0.92] mb-4">
+            The web, in<br />
+            <span className="text-amber-600">structured JSON.</span>
+          </h1>
+          
+          <p className="text-lg text-stone-500 mb-6 max-w-md">
+            Network-level extraction at <span className="text-stone-900 font-medium">89ms</span>. No browsers. No selectors.
+          </p>
 
-        {/* Left column — dark */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] min-h-[92vh]">
+          <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center mb-6">
+            <WaitlistForm source="hero" />
+            <WaitlistCounter />
+          </div>
 
-          {/* LEFT: dark panel */}
-          <motion.div className="dark-section flex flex-col justify-between p-8 sm:p-12 border-r-2 border-white/10 relative overflow-hidden"
-            initial={{ x: -40, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-            {/* subtle amber orb */}
-            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none"
-              style={{ background: "radial-gradient(circle, rgba(193,123,42,0.15) 0%, transparent 70%)" }} />
-
-            <div className="relative z-10">
-              {/* Status pills */}
-              <div className="flex flex-wrap gap-2 mb-10">
-                {["PRIVATE BETA", "AI-READY", "SEEKING INVESTORS"].map((p, i) => (
-                  <motion.span key={p} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + i * 0.08 }}
-                    className="font-mono text-[9px] tracking-[0.22em] uppercase px-3 py-1.5 border"
-                    style={{ background: "rgba(193,123,42,0.1)", borderColor: "rgba(193,123,42,0.35)", color: "#E8A94D" }}>
-                    {p}
-                  </motion.span>
-                ))}
-              </div>
-
-              {/* Social proof */}
-              <div className="space-y-3 mb-10">
-                {[
-                  { val: "500+", lbl: "B2B engineers on waitlist", sub: "72 hours organic" },
-                  { val: "#5", lbl: "Product of the Day", sub: "Product Hunt" },
-                  { val: "89ms", lbl: "Average extraction time", sub: "no browser needed" },
-                ].map(s => (
-                  <div key={s.val} className="flex items-baseline gap-3 border-b py-2.5" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
-                    <span className="font-sans font-extrabold text-2xl" style={{ color: "#E8A94D" }}>{s.val}</span>
-                    <div>
-                      <p className="font-body text-sm" style={{ color: "#D4C8BC" }}>{s.lbl}</p>
-                      <p className="font-mono text-[10px]" style={{ color: "#5A5045" }}>{s.sub}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* PH badge */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="relative z-10">
-              <a href="https://www.producthunt.com/products/scrapr-universal-web-scraping-api?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_campaign=badge-scrapr"
-                target="_blank" rel="noopener noreferrer">
-                <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=1092571&theme=dark"
-                  alt="SCRAPR on Product Hunt" className="h-9 w-auto opacity-70 hover:opacity-100 transition-opacity" />
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* RIGHT: light panel */}
-          <motion.div id="hero-form" className="flex flex-col justify-center px-8 sm:px-14 py-16 relative overflow-hidden"
-            initial={{ x: 40, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-
-            {/* Watermark */}
-            <div className="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden">
-              <span className="font-sans font-extrabold text-[160px] sm:text-[220px] tracking-tight leading-none opacity-[0.03] text-stone-900">SR</span>
-            </div>
-
-            <div className="relative z-10">
-              <p className="section-label mb-5">The Data Layer For AI</p>
-              <h1 className="font-sans font-extrabold text-[3rem] sm:text-[4.2rem] md:text-[5rem] tracking-[-0.04em] leading-[0.9] text-stone-950 mb-6">
-                THE WEB<br /><span className="shimmer-text">→</span><br />STRUCTURED<br />DATA
-              </h1>
-              <p className="font-body text-base text-stone-500 max-w-md mb-10 leading-relaxed">
-                SCRAPR intercepts the network layer of any website — extracting clean, typed JSON in under 200ms. No browsers. No selectors. Built for AI agents and LLM pipelines.
-              </p>
-              <WaitlistForm source="hero" />
-              <div className="mt-5">
-                <WaitlistCounter />
-              </div>
-            </div>
-          </motion.div>
+          <div className="flex gap-4 text-xs text-stone-400">
+            <span><strong className="text-stone-900">500+</strong> B2B waitlist</span>
+            <span className="text-stone-300">|</span>
+            <span><strong className="text-stone-900">#5</strong> Product Hunt</span>
+            <span className="text-stone-300">|</span>
+            <span><strong className="text-stone-900">89ms</strong> avg</span>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* ══ PIPELINE / HOW IT WORKS ══ */}
-      <section id="how" className="py-16 sm:py-24 px-4 sm:px-6 border-b-2 border-stone-900">
+      <section id="how" className="py-24 sm:py-28 px-4 sm:px-6 border-b-2 border-stone-900">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeUp()} className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 mb-12 items-end">
             <div>
@@ -386,7 +341,6 @@ const Index = () => {
             <PipelineDiagram />
           </motion.div>
 
-          {/* Detailed step cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 mt-10 border-2 border-stone-900 overflow-hidden">
             {[
               { num: "01", icon: Globe, title: "Send a URL", desc: "POST any URL. No selectors, no config, no browser setup. Just the URL and your API key." },
@@ -411,8 +365,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ══ WHY SCRAPR ══ */}
-      <section id="features" className="py-16 sm:py-24 px-4 sm:px-6">
+      <section id="features" className="py-24 sm:py-28 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeUp()} className="mb-12">
             <p className="section-label mb-3">Why SCRAPR</p>
@@ -448,8 +401,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ══ DARK: API DEMO ══ */}
-      <section id="api" className="dark-section py-16 sm:py-24 px-4 sm:px-6 border-y-2 border-stone-900 relative overflow-hidden">
+      <DocsSection />
+      <MapsSection />
+
+      <section id="api" className="dark-section py-24 sm:py-28 px-4 sm:px-6 border-y-2 border-stone-900 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 70% 50%, rgba(193,123,42,0.07) 0%, transparent 60%)" }} />
         <div className="max-w-6xl mx-auto relative">
           <motion.div {...fadeUp()} className="mb-10">
@@ -474,7 +429,6 @@ const Index = () => {
               </div>
             ))}
           </motion.div>
-          {/* Quick start */}
           <motion.div {...fadeUp(0.28)} className="mt-5 border border-white/10 p-5 sm:p-6">
             <p className="font-mono text-[10px] tracking-[0.2em] uppercase mb-4" style={{ color: "#5A5045" }}>Quick Start</p>
             <pre className="font-mono text-[12px] leading-[1.9] overflow-x-auto" style={{ color: "#8A8078" }}>
@@ -486,8 +440,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ══ USE CASES ══ */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
+      <section className="py-24 sm:py-28 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeUp()} className="mb-12">
             <p className="section-label mb-3">Use Cases</p>
@@ -521,8 +474,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ══ DARK: TRACTION ══ */}
-      <section id="traction" className="dark-section py-16 sm:py-24 px-4 sm:px-6 border-y-2 border-stone-900">
+      <section id="traction" className="dark-section py-24 sm:py-28 px-4 sm:px-6 border-y-2 border-stone-900">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeUp()} className="mb-12">
             <p className="font-mono text-[10px] tracking-[0.25em] uppercase mb-3" style={{ color: "#C17B2A" }}>Traction</p>
@@ -575,8 +527,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ══ INVESTMENT ══ */}
-      <section id="invest" className="py-16 sm:py-24 px-4 sm:px-6">
+      <section id="invest" className="py-24 sm:py-28 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto border-2 border-stone-900">
           <motion.div {...fadeUp()}>
             <div className="flex flex-wrap items-center gap-3 px-7 sm:px-10 py-5 border-b-2 border-stone-900 bg-stone-900">
@@ -623,7 +574,6 @@ const Index = () => {
 
       <Divider />
 
-      {/* ══ FAQ ══ */}
       <section className="py-14 sm:py-20 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div {...fadeUp()} className="mb-10">
@@ -642,37 +592,35 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ══ FOOTER — DARK ══ */}
-      <footer className="dark-section border-t-2 border-stone-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          {/* CTA strip */}
-          <motion.div {...fadeUp()} className="py-16 sm:py-20 text-center border-b border-white/[0.06]">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase mb-5" style={{ color: "#C17B2A" }}>Early Access</p>
-            <h2 className="font-sans font-extrabold text-4xl sm:text-5xl tracking-tight mb-4 leading-[1.02]" style={{ color: "#F2EEE5" }}>
-              Join the extraction layer<br />for AI agents.
-            </h2>
-            <p className="font-body text-sm mb-10 max-w-sm mx-auto" style={{ color: "#6B6055" }}>No card required. First cohort ships in weeks.</p>
-            <div className="flex justify-center">
+      <footer className="bg-stone-900 border-t-2 border-stone-900">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+            <div>
+              <h2 className="font-extrabold text-3xl sm:text-4xl text-white mb-4">
+                Join the waitlist.
+              </h2>
+              <p className="text-stone-400 mb-6">
+                We're raising $500K pre-seed to build. Get early access when we launch.
+              </p>
+            </div>
+            <div className="flex justify-center lg:justify-end">
               <WaitlistForm source="footer" dark />
             </div>
-          </motion.div>
-          {/* Bottom links */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 border-b" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-stone-700">
             {[
-              { title: "Product", links: [["How It Works","#how"],["API Reference","#api"],["Traction","#traction"]] },
-              { title: "Company", links: [["About","#"],["Blog","#"],["Contact","mailto:sukritvemula@outlook.com"]] },
-              { title: "Legal", links: [["Privacy","#"],["Terms","#"]] },
-              { title: "Connect", links: [["Twitter","#"],["Discord","#"],["Email","mailto:sukritvemula@outlook.com"]] },
+              { title: "Product", links: [["How It Works","#how"],["Docs","#docs"],["Maps","#maps"]] },
+              { title: "Company", links: [["Contact","mailto:sukritvemula@outlook.com"]] },
+              { title: "Fundraising", links: [["Pitch Deck","mailto:sukritvemula?subject=Pitch+Deck"],["Invest","mailto:sukritvemula?subject=Investment"]] },
+              { title: "Connect", links: [["Email","mailto:sukritvemula@outlook.com"]] },
             ].map(col => (
               <div key={col.title}>
-                <p className="font-mono text-[9px] tracking-[0.3em] uppercase mb-3" style={{ color: "#3A3228" }}>{col.title}</p>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-stone-500 mb-3">{col.title}</p>
                 <ul className="space-y-2">
                   {col.links.map(([l, h]) => (
                     <li key={l}>
-                      <a href={h} className="font-body text-xs transition-colors duration-200"
-                        style={{ color: "#4A4035" }}
-                        onMouseEnter={e => (e.currentTarget.style.color = "#C17B2A")}
-                        onMouseLeave={e => (e.currentTarget.style.color = "#4A4035")}>
+                      <a href={h} className="text-sm text-stone-300 hover:text-amber-400 transition-colors">
                         {l}
                       </a>
                     </li>
@@ -681,12 +629,13 @@ const Index = () => {
               </div>
             ))}
           </div>
-          <div className="flex items-center justify-between py-5">
-            <div className="flex items-center gap-2">
-              <img src="/images/logo - nobg.png" alt="SCRAPR" className="w-4 h-4 object-contain opacity-30" />
-              <span className="font-sans font-bold text-xs" style={{ color: "#3A3228" }}>SCRAPR</span>
+          
+          <div className="flex items-center justify-between pt-8 border-t border-stone-700">
+            <div className="flex items-center gap-3">
+              <span className="font-extrabold text-white">SCRAPR</span>
+              <span className="text-stone-500 text-sm">MVP</span>
             </div>
-            <p className="font-mono text-[10px]" style={{ color: "#3A3228" }}>v1.0 · © 2026</p>
+            <p className="text-stone-500 text-sm">© 2026</p>
           </div>
         </div>
       </footer>
